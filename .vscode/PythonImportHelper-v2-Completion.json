@@ -32,6 +32,14 @@
         "documentation": {}
     },
     {
+        "label": "GroqLLM",
+        "importPath": "src.llms.groqllm",
+        "description": "src.llms.groqllm",
+        "isExtraImport": true,
+        "detail": "src.llms.groqllm",
+        "documentation": {}
+    },
+    {
         "label": "BlogState",
         "importPath": "src.states.blogstate",
         "description": "src.states.blogstate",
@@ -81,6 +89,14 @@
         "documentation": {}
     },
     {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
         "label": "TypedDict",
         "importPath": "typing",
         "description": "typing",
@@ -105,11 +121,44 @@
         "documentation": {}
     },
     {
+        "label": "uvicorn",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "uvicorn",
+        "description": "uvicorn",
+        "detail": "uvicorn",
+        "documentation": {}
+    },
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Request",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "GraphBuilder",
+        "importPath": "src.graphs.graph_builder",
+        "description": "src.graphs.graph_builder",
+        "isExtraImport": true,
+        "detail": "src.graphs.graph_builder",
+        "documentation": {}
+    },
+    {
         "label": "GraphBuilder",
         "kind": 6,
         "importPath": "src.graphs.graph_builder",
         "description": "src.graphs.graph_builder",
-        "peekOfCode": "class GraphBuilder:\n    def  __init__(self,llm):\n        self.llm=llm\n        self.graph=StateGraph(BlogState)\n    def build_topic_graph(self):\n        self.blog_node=BlogNode(self.llm)\n        self.graph.add_node(\"title\",self.blog_node.title)\n        self.graph.add_node(\"content\",)\n        self.graph.add_edge(START,\"title\")\n        self.graph.add_edge(\"title\",\"content\")",
+        "peekOfCode": "class GraphBuilder:\n    def  __init__(self,llm):\n        self.llm=llm\n        self.graph=StateGraph(BlogState)\n    def build_topic_graph(self):\n        self.blog_node=BlogNode(self.llm)\n        self.graph.add_node(\"title\",self.blog_node.title)\n        self.graph.add_node(\"content\",self.blog_node.content)\n        self.graph.add_edge(START,\"title\")\n        self.graph.add_edge(\"title\",\"content\")",
         "detail": "src.graphs.graph_builder",
         "documentation": {}
     },
@@ -147,6 +196,15 @@
         "description": "src.states.blogstate",
         "peekOfCode": "class BlogState(TypedDict):\n    topic: str\n    blog: Blog\n    current_language:str",
         "detail": "src.states.blogstate",
+        "documentation": {}
+    },
+    {
+        "label": "langchain_api_key",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "langchain_api_key = os.getenv(\"LANGCHAIN_API_KEY\")\nif langchain_api_key is not None:\n    os.environ[\"LANGSMITH_API_KEY\"] = langchain_api_key\n@app.post(\"/blogs\")\nasync def create_blog(request:Request):\n    body=await request.json()\n    topic=body.get(\"topic\",\"\")\n    llm=GroqLLM().get_llm()\n    graph_builder=GraphBuilder(llm)\n    if topic and llm:",
+        "detail": "app",
         "documentation": {}
     }
 ]

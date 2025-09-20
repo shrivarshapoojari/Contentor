@@ -12,10 +12,16 @@ class GraphBuilder:
     def build_topic_graph(self):
         self.blog_node=BlogNode(self.llm)
         self.graph.add_node("title",self.blog_node.title)
-        self.graph.add_node("content",)
+        self.graph.add_node("content",self.blog_node.content)
 
         self.graph.add_edge(START,"title")
         self.graph.add_edge("title","content")
         self.graph.add_edge("content",END)
 
-        return self.graph
+        return self.graph.compile()
+    
+
+    def setup_graph(self,usecase):
+
+        if usecase=="topic":
+            return self.build_topic_graph()
