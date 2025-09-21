@@ -7,3 +7,4 @@ fastapi
 uvicorn
 watchdog
 python-dotenv
+langgraph-cli[inmem]

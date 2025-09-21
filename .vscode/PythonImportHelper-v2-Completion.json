@@ -98,10 +98,10 @@
     },
     {
         "label": "TypedDict",
-        "importPath": "typing",
-        "description": "typing",
+        "importPath": "typing_extensions",
+        "description": "typing_extensions",
         "isExtraImport": true,
-        "detail": "typing",
+        "detail": "typing_extensions",
         "documentation": {}
     },
     {
